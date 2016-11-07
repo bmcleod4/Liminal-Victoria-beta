@@ -63,7 +63,7 @@ function shapeText(text, glyphs, maxWidth, lineHeight, horizontalAlign, vertical
             if (glyph) x += glyph.advance + spacing;
 
         } else {
-            positionedGlyphs.push(new PositionedGlyph(codePoint, x, yOffset - (glyph.rect ? (glyph.rect.w - verticalHeight) / 2 : 0), glyph, -Math.PI / 2));
+            positionedGlyphs.push(new PositionedGlyph(codePoint, x, yOffset, glyph, -Math.PI / 2));
             if (glyph) x += verticalHeight + spacing;
         }
     }
