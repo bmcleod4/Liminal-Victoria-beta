@@ -1,19 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset='utf-8' />
+    <title>Liminal Victoria</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
 </head>
-
 <body>
-    <div id='map' style='width: 400px; height: 300px;' />
 
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYm1jbGVvZDQiLCJhIjoiY2l1amt1MWE3MDB1aDJ6b2R4ZXRvd2RhcSJ9.CIiNm6Yp-Ikuo7kedKDZPg';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/bmcleod4/ciutxvf4300ge2iqot49pev4y'
-        });
-    </script>
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYm1jbGVvZDQiLCJhIjoiY2l1amt1MWE3MDB1aDJ6b2R4ZXRvd2RhcSJ9.CIiNm6Yp-Ikuo7kedKDZPg';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/bmcleod4/ciutxvf4300ge2iqot49pev4y',
+    center: [-123.352253, 48.420239],
+    zoom: 13.5
+});
+
+map.on('load', function () {
+    
+    map.addSource("places", {
+        "type": "geojson",
+        "data": {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Victoria Golf Course</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.299924, 48.414932]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Ross Bay Cemetery</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.340535, 48.411174]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Craigdarroch Castle</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.343803, 48.422352]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Pioneer Square</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.359245, 48.422778]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Beacon Hill Park</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.362532, 48.412539]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>St. Ann's Academy</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.363757, 48.419020]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Chinatown</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.367288, 48.429377]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>The Fairmont Empress</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.367612, 48.421786]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Market Square</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.368775, 48.428098]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Bastion Square</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.369367, 48.425915]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>B.C. Parliament Buildings</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.370294, 48.419387]
+                }
+            }, {
+                "type": "Feature",
+                "properties": {
+                    "description": "<p>Hatley Castle</p>",
+                    "icon": "lzxquwz01-55604"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-123.472601, 48.434488]
+                }
+            }]
+        }
+    });
+    map.addLayer({
+        "id": "places",
+        "type": "symbol",
+        "source": "places",
+        "layout": {
+            "icon-image": "{icon}-15",
+            "icon-allow-overlap": true
+        }
+    });
+});
+var popup = new mapbox.gl.Popup({
+    closeButton: false,
+    closeOnClick: false
+});
+map.on('mousemove', function(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+    if (!features.length) {
+        popup.remove();
+        return;
+    }
+
+    var feature = features[0];
+
+    popup.setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
+});
+</script>
+
 </body>
 </html>
